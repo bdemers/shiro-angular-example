@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title th:text="'Stormtrooper: ' +${model.id}">Stormtrooper: FN-1234</title>
+
+        <object th:include="fragments/head :: head" th:remove="tag" >
+            <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/js-md5/0.3.0/md5.min.js"></script>
+
+            <style>
+                .trooper-panel {
+                    background: url(https://pixabay.com/static/uploads/photo/2015/02/10/23/20/lego-631850_640.jpg) no-repeat !important;
+                    /* copyright cc-0 */
+                }
+            </style>
+        </object>
+    </head>
+
+    <body>
+
+        <div th:replace="fragments/header :: header"></div>
+
+        <style>
+
+            .trooper-panel-size {
+                height: 480px;
+                width: 640px;
+            }
+
+            .trooper-table-font {
+                font-size: 22px;
+            }
+
+            .trooper-container-pad {
+                padding-top: 65px;
+                padding-bottom: 65px;
+            }
+
+            .trooper-panel-body {
+                height: 100%;
+            }
+
+        </style>
+
+
+        <div class="container trooper-panel-size trooper-container-pad">
+
+            <h1 th:text="'Stormtrooper: ' +${model.id}">Stormtrooper: FN-1234</h1>
+
+            <div class="panel panel-default trooper-panel trooper-panel-size text-right">
+
+                <div class="panel-body trooper-panel-body">
+                    <div class="text-right pull-right">
+                    <table  class="table trooper-table-font">
+                        <tr>
+                            <th>Class:</th>
+                            <th th:text="${model.type}">Sandtrooper</th>
+                        </tr>
+                        <tr>
+                            <th>Species:</th>
+                            <th th:text="${model.species}">Human</th>
+                        </tr>
+                        <tr>
+                            <th>Planet of Origin:</th>
+                            <th th:text="${model.planetOfOrigin}">Earth</th>
+                        </tr>
+                    </table>
+
+                        <button class="btn btn-default" data-toggle="modal" data-target="#editTrooper">
+                            Edit
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <div class="panel-footer">
+                    <a class="btn btn-default" href="/trooper">Back</a>
+                </div>
+
+                <div class="panel custom-pad-for-footer"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="editTrooper" tabindex="-1" role="dialog"
+             aria-labelledby="editTrooperLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <form role="form" method="post" th:href="@{'/trooper/' + ${model.id}}">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="editTrooperLabel" th:text="'Stormtrooper: ' +${model.id}">Stormtrooper: FN-1234
+                        </h4>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+
+
+                            <div class="form-group">
+                                <label for="type">Class</label>
+                                <input type="text" class="form-control"
+                                       id="type" name="type" placeholder="Class" th:value="${model.type}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="species">Species</label>
+                                <input type="text" class="form-control"
+                                       id="species" name="species" placeholder="Species" th:value="${model.species}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="planetOfOrigin">Planet of Origin</label>
+                                <input type="text" class="form-control"
+                                       id="planetOfOrigin" name="planetOfOrigin" placeholder="Planet of Origin" th:value="${model.planetOfOrigin}"/>
+                            </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer :: footer"></div>
+
+    </body>
+</html>
