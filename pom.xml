@@ -64,18 +64,18 @@
             <version>2.1.5.RELEASE</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.github.theborakompanioni</groupId>-->
-            <!--<artifactId>thymeleaf-extras-shiro</artifactId>-->
-            <!--<version>1.2.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>1.2.1</version>
+        </dependency>
 
-        <!--&lt;!&ndash; Stormpath &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.stormpath.shiro</groupId>-->
-            <!--<artifactId>stormpath-shiro-servlet-plugin</artifactId>-->
-            <!--<version>${stormpath-shiro.version}</version>-->
-        <!--</dependency>-->
+        <!-- Stormpath -->
+        <dependency>
+            <groupId>com.stormpath.shiro</groupId>
+            <artifactId>stormpath-shiro-servlet-plugin</artifactId>
+            <version>${stormpath-shiro.version}</version>
+        </dependency>
 
         <!-- Servlets -->
         <dependency>
