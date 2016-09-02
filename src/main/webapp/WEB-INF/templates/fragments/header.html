@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
@@ -28,6 +29,38 @@
                 </div>
 
                 <!-- Start user login header -->
+
+                <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    $(function() {
+                        var email = /*[[${#httpServletRequest.getRemoteUser()}]]*/ "test@example.com";
+                        var src = 'http://www.gravatar.com/avatar/' + md5(email.trim().toLowerCase()) + '?s=30';
+                        $('#gravatar').attr('src', src);
+                    });
+                    /*]]>*/
+                </script>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="menu-item">
+                        <p shiro:guest="" class="navbar-btn">
+                            <a class="btn btn-success" href="/login">Login</a>
+                            <a class="btn btn-primary" href="/register">Sign up now</a>
+                        </p>
+                        <p shiro:authenticated="" class="navbar-btn">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="profile-image img-circle" id="gravatar" src="http://www.gravatar.com/avatar/missing?s=30"/>
+                                <span th:text="${#httpServletRequest.getRemoteUser()}">userid</span> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="$('#logout_form').submit()">Logout</a></li>
+                            </ul>
+                        </div>
+                        <form id="logout_form" action="/logout" method="post"></form>
+                        </p>
+
+                    </li>
+                </ul>
 
                 <!-- End user login header -->
 

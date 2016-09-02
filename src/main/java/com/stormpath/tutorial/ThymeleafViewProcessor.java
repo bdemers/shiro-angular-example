@@ -15,6 +15,7 @@
  */
 package com.stormpath.tutorial;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.glassfish.jersey.server.mvc.Template;
 import org.glassfish.jersey.server.mvc.Viewable;
 import org.thymeleaf.TemplateEngine;
@@ -68,7 +69,7 @@ public class ThymeleafViewProcessor implements MessageBodyWriter<Object> {
         templateResolver.setTemplateMode(StandardTemplateModeHandlers.HTML5.getTemplateModeName());
 
         templateEngine = new TemplateEngine();
-//        templateEngine.addDialect(new ShiroDialect());
+        templateEngine.addDialect(new ShiroDialect());
         templateEngine.setTemplateResolver(templateResolver);
     }
 
