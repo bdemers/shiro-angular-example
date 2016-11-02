@@ -17,14 +17,13 @@ package com.stormpath.tutorial.resources;
 
 import com.stormpath.tutorial.dao.StormtrooperDao;
 import com.stormpath.tutorial.models.Stormtrooper;
-import org.glassfish.jersey.server.mvc.Template;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 
 
-@Path("/")
+@Path("/troopers")
 public class TrooperResource {
 
     final private StormtrooperDao trooperDao;
@@ -37,16 +36,14 @@ public class TrooperResource {
 
     @GET
     @Path("/")
-    @Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
-    @Template(name = "troopers")
+    @Produces({MediaType.APPLICATION_JSON})
     public Collection<Stormtrooper> listTroopers() {
         return trooperDao.listStormtroopers();
     }
 
     @GET
     @Path("/{id}")
-    @Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
-    @Template(name = "trooper")
+    @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper getTrooper(@PathParam("id") String id) {
 
         Stormtrooper stormtrooper = trooperDao.getStormtrooper(id);
@@ -58,8 +55,7 @@ public class TrooperResource {
 
     @POST
     @Path("/{id}")
-    @Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
-    @Template(name = "trooper")
+    @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper updateTrooper(@PathParam("id") String id,
                                       @FormParam("type") String type,
                                       @FormParam("species") String species,
@@ -75,9 +71,18 @@ public class TrooperResource {
     }
 
     @POST
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Stormtrooper updateTrooper(@PathParam("id") String id, Stormtrooper updatedTrooper) {
+
+        // TODO: check if ID is the same
+        trooperDao.updateStormtrooper(updatedTrooper);
+        return updatedTrooper;
+    }
+
+    @POST
     @Path("/")
-    @Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
-    @Template(name = "trooper")
+    @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper createTrooper(@FormParam("id") String id,
                                       @FormParam("type") String type,
                                       @FormParam("species") String species,
@@ -86,5 +91,11 @@ public class TrooperResource {
         Stormtrooper stormtrooper = new Stormtrooper(id, planetOfOrigin, species, type);
         trooperDao.addStormtrooper(stormtrooper);
         return stormtrooper;
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public void deleteTrooper(@PathParam("id") String id) {
+        trooperDao.deleteStormtrooper(id);
     }
 }

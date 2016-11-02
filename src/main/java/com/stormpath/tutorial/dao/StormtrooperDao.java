@@ -17,34 +17,34 @@ package com.stormpath.tutorial.dao;
 
 import com.stormpath.tutorial.models.Stormtrooper;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 
 /**
  * Dummy DAO that will generate 50 random Stormtroopers upon creation.
  */
-public class StormtrooperDao {
+public final class StormtrooperDao {
 
-    private static StormtrooperDao INSTANCE;
+    final static private String[] trooperTypes = {"Basic", "Space", "Aquatic", "Marine", "Jump", "Sand"};
+    final static private String[] planetsList = {"Coruscant", "Tatooine", "Felucia", "Hoth", "Naboo", "Serenno"};
+    final static private String[] speciesList = {"Human", "Kel Dor", "Nikto", "Twi'lek", "Unidentified"};
+    final static private Random RANDOM = new SecureRandom();
 
-    private static Object mutex = new Object();
+    final private Map<String, Stormtrooper> trooperMap = Collections.synchronizedSortedMap(new TreeMap<String, Stormtrooper>());
 
-    public Map<String, Stormtrooper> trooperMap = Collections.synchronizedSortedMap(new TreeMap<>());
+    public StormtrooperDao() {
+        for (int i = 0; i < 50; i++) {
+            addStormtrooper(randomTrooper());
+        }
+    }
+
+    private static class SingletonHolder {
+        static StormtrooperDao instance = new StormtrooperDao();
+    }
 
     public static StormtrooperDao getInstance() {
-        if (INSTANCE == null) {
-            synchronized (mutex) {
-                if (INSTANCE == null) {
-                    StormtrooperDao trooperDao = new StormtrooperDao();
-
-                    for (int i = 0; i < 50; i++) {
-                        trooperDao.addStormtrooper(randomTrooper());
-                    }
-                    INSTANCE = trooperDao;
-                }
-            }
-        }
-        return INSTANCE;
+        return SingletonHolder.instance;
     }
 
     public Collection<Stormtrooper> listStormtroopers() {
@@ -65,16 +65,14 @@ public class StormtrooperDao {
         addStormtrooper(stormtrooper);
     }
 
+    public boolean deleteStormtrooper(String id) {
+        return trooperMap.remove(id) != null;
+    }
+
 
     ///////////////////////////////////
     //  Dummy data generating below  //
     ///////////////////////////////////
-
-    final static private String[] trooperTypes = {"Basic", "Space", "Aquatic", "Marine", "Jump", "Sand"};
-    final static private String[] planetsList = {"Coruscant", "Tatooine", "Felucia", "Hoth", "Naboo", "Serenno"};
-    final static private String[] speciesList = {"Human", "Kel Dor", "Nikto", "Twi'lek", "Unidentified"};
-
-    final static private Random RANDOM = new Random();
 
     private static Stormtrooper randomTrooper(String id) {
         String planet = planetsList[RANDOM.nextInt(planetsList.length)];
@@ -88,6 +86,4 @@ public class StormtrooperDao {
         String id = "FN-"  + String.format("%04d", RANDOM.nextInt(9999));
         return randomTrooper(id);
     }
-
-
 }

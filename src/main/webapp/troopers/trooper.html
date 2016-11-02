@@ -1,0 +1,77 @@
+<div class="container"  ng-controller="TrooperController as $trooperModal">
+
+    <h1 class="text-center">Stormtrooper: {{trooper.id}}</h1>
+
+    <div class="panel panel-default trooper-panel trooper-panel-size text-right">
+
+        <div class="panel-body trooper-panel-body">
+            <div class="text-right pull-right">
+                <table  class="table trooper-table-font">
+                    <tr>
+                        <th>Type:</th>
+                        <th>{{trooper.type}}</th>
+                    </tr>
+                    <tr>
+                        <th>Species:</th>
+                        <th>{{trooper.species}}</th>
+                    </tr>
+                    <tr>
+                        <th>Planet of Origin:</th>
+                        <th>{{trooper.planetOfOrigin}}</th>
+                    </tr>
+                </table>
+
+                <div class="new-trooper-modal">
+                    <script type="text/ng-template" id="editTrooperModal.html">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="editTrooperLabel">Stormtrooper: {{trooper.id}}</h4>
+                        </div>
+
+                        <form role="form" >
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="type">Type</label>
+                                    <input type="text" class="form-control"
+                                           id="type" name="type" placeholder="Type" ng-model="$trooperModal.trooper.type"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="species">Species</label>
+                                    <input type="text" class="form-control"
+                                           id="species" name="species" placeholder="Species" ng-model="$trooperModal.trooper.species"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="planetOfOrigin">Planet of Origin</label>
+                                    <input type="text" class="form-control"
+                                           id="planetOfOrigin" name="planetOfOrigin" placeholder="Planet of Origin" ng-model="$trooperModal.trooper.planetOfOrigin"/>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-warning" type="button" ng-click="$trooperModal.cancel()">Cancel</button>
+                            <button class="btn btn-primary" type="button" ng-click="$trooperModal.save()">Save</button>
+                        </div>
+
+                    </script>
+                    <div class="btn-toolbar pull-right">
+                        <button type="button" class="btn btn-danger" ng-click="deleteTrooper()">Delete</button>
+                        <button type="button" class="btn btn-default" ng-click="$trooperModal.open(trooper)">Edit</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <a class="btn btn-default" ui-sref="troopers">Back</a>
+        </div>
+
+    </div>
+
+</div>

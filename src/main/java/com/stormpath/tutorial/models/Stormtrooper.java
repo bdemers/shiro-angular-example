@@ -25,6 +25,10 @@ public class Stormtrooper {
     private String species;
     private String type;
 
+    public Stormtrooper() {
+        // empty to allow for bean access
+    }
+
     public Stormtrooper(String id, String planetOfOrigin, String species, String type) {
         this.id = id;
         this.planetOfOrigin = planetOfOrigin;

@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.stormpath.tutorial</groupId>
-    <artifactId>stormpath-shiro-servlet-tutorial</artifactId>
+    <artifactId>stormpath-shiro-angularjs</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <name>Stormpath+Shiro Application</name>
     <packaging>war</packaging>
@@ -31,43 +31,29 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <stormpath-shiro.version>0.7.0-SNAPSHOT</stormpath-shiro.version>
+        <stormpath-shiro.version>0.7.3-SNAPSHOT</stormpath-shiro.version>
         <logback.version>1.1.7</logback.version>
         <slf4j.version>1.7.16</slf4j.version>
+
+
+        <stormpath.angular.version>1.1.1</stormpath.angular.version>
 
     </properties>
 
     <dependencies>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>2.23.2</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-mvc</artifactId>
-            <version>2.23.2</version>
-        </dependency>
-
+        <!-- This example uses Jersey, but using RestEasy should be just as easy -->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>2.23.2</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>2.1.5.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.theborakompanioni</groupId>
-            <artifactId>thymeleaf-extras-shiro</artifactId>
-            <version>1.2.1</version>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.23.2</version>
         </dependency>
 
         <!-- Stormpath -->
@@ -85,17 +71,53 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- rewrite angular paths to support html5 mode -->
+        <dependency>
+            <groupId>org.ocpsoft.rewrite</groupId>
+            <artifactId>rewrite-servlet</artifactId>
+            <version>3.4.1.Final</version>
+        </dependency>
+
         <!-- Web Jars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.3.7-1</version>
+            <version>3.3.7</version>
         </dependency>
-
         <dependency>
             <groupId>org.webjars.bower</groupId>
-            <artifactId>md5</artifactId>
-            <version>0.3.0</version>
+            <artifactId>stormpath-sdk-angularjs</artifactId>
+            <version>${stormpath.angular.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-ui-router</artifactId>
+            <version>0.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-resource</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-animate</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-sanitize</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-gravatar</artifactId>
+            <version>0.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-ui-bootstrap-bower</artifactId>
+            <version>2.2.0</version>
         </dependency>
 
         <!-- Logging -->

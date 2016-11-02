@@ -1,0 +1,80 @@
+<div class="container">
+
+    <h1>Stormtroopers</h1>
+    <div class="container custom-trooper-container">
+
+        <div ng-controller="NewTrooperModal as $trooperModal" class="new-trooper-modal">
+            <script type="text/ng-template" id="newTrooperModal.html">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="newTrooperLabel"> New Stormtrooper</h4>
+                </div>
+
+
+                <form role="form" ng-submit="addTrooper()">
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="type">ID</label>
+                            <input type="text" class="form-control"
+                                   id="id" name="id" placeholder="ID" ng-model="$trooperModal.trooper.id"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">Class</label>
+                            <input type="text" class="form-control"
+                                   id="type" name="type" placeholder="Class" ng-model="$trooperModal.trooper.type"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="species">Species</label>
+                            <input type="text" class="form-control"
+                                   id="species" name="species" placeholder="Species" ng-model="$trooperModal.trooper.species"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="planetOfOrigin">Planet of Origin</label>
+                            <input type="text" class="form-control"
+                                   id="planetOfOrigin" name="planetOfOrigin" placeholder="Planet of Origin" ng-model="$trooperModal.trooper.planetOfOrigin"/>
+                        </div>
+                    </div>
+
+
+                </form>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" ng-click="$trooperModal.cancel()">Cancel</button>
+                    <button class="btn btn-primary" type="button" ng-click="$trooperModal.save()">Save</button>
+                </div>
+
+            </script>
+            <button type="button" class="btn btn-default pull-right" ng-click="$trooperModal.open()">Add</button>
+        </div>
+
+
+    </div>
+
+    <div class="panel panel-default">
+        <table id="troopers" class="table table-striped table-bordered " cellspacing="0" width="20%" ng-show="vm.troopers.length">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TYPE</th>
+                    <th>DETAILS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="trooper in vm.troopers">
+                    <td>{{trooper.id}}</td>
+                    <td>{{trooper.type}}</td>
+                    <td><a ui-sref="viewTrooper({id:trooper.id})">View</a></td>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="panel custom-pad-for-footer"></div>

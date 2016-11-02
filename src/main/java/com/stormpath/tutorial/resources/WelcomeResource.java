@@ -15,8 +15,6 @@
  */
 package com.stormpath.tutorial.resources;
 
-import org.glassfish.jersey.server.mvc.Template;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,8 +27,7 @@ public class WelcomeResource {
 
     @GET
     @Path("/")
-    @Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
-    @Template(name = "welcome")
+    @Produces({MediaType.APPLICATION_JSON})
     public Welcome getMessageOfTheDay() {
         return new Welcome("The First Order welcomes you.");
     }

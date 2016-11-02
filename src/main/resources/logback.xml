@@ -27,4 +27,5 @@
     </root>
 
     <logger name="com.stormpath" level="INFO"/>
+    <logger name="org.ocpsoft" level="DEBUG"/>
 </configuration>
