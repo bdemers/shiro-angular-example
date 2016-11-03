@@ -41,9 +41,9 @@ angular
 
         modalInstance.result.then(
             function save(trooper) {
-                TrooperService.addTrooper(trooper, function () {
-                    $log.info('Modal saved for trooper: ' + trooper);
-                    $state.go('viewTrooper', {id: trooper.id});
+                TrooperService.addTrooper(trooper, function (resultTrooper) {
+                    $log.info('Modal saved for trooper: ' + resultTrooper);
+                    $state.go('viewTrooper', {id: resultTrooper.id});
                 });
             },
             function cancel() {
