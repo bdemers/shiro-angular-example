@@ -17,6 +17,7 @@ package com.stormpath.tutorial.resources;
 
 import com.stormpath.tutorial.dao.StormtrooperDao;
 import com.stormpath.tutorial.models.Stormtrooper;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,6 +37,7 @@ public class TrooperResource {
 
     @GET
     @Path("/")
+    @RequiresPermissions("troopers:read")
     @Produces({MediaType.APPLICATION_JSON})
     public Collection<Stormtrooper> listTroopers() {
         return trooperDao.listStormtroopers();
@@ -43,6 +45,7 @@ public class TrooperResource {
 
     @GET
     @Path("/{id}")
+    @RequiresPermissions("troopers:read")
     @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper getTrooper(@PathParam("id") String id) {
 
@@ -55,6 +58,7 @@ public class TrooperResource {
 
     @POST
     @Path("/{id}")
+    @RequiresPermissions("troopers:update")
     @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper updateTrooper(@PathParam("id") String id,
                                       @FormParam("type") String type,
@@ -71,6 +75,7 @@ public class TrooperResource {
 
     @POST
     @Path("/{id}")
+    @RequiresPermissions("troopers:update")
     @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper updateTrooper(@PathParam("id") String id, Stormtrooper updatedTrooper) {
 
@@ -79,6 +84,7 @@ public class TrooperResource {
 
     @POST
     @Path("/")
+    @RequiresPermissions("troopers:create")
     @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper updateTrooper(Stormtrooper updatedTrooper) {
 
@@ -87,6 +93,7 @@ public class TrooperResource {
 
     @POST
     @Path("/")
+    @RequiresPermissions("troopers:create")
     @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper createTrooper(@FormParam("id") String id,
                                       @FormParam("type") String type,
@@ -100,6 +107,7 @@ public class TrooperResource {
 
     @DELETE
     @Path("/{id}")
+    @RequiresPermissions("troopers:delete")
     public void deleteTrooper(@PathParam("id") String id) {
         trooperDao.deleteStormtrooper(id);
     }
