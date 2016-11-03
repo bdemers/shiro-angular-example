@@ -64,10 +64,17 @@ angular.module('shiroExample', [
       $state.transitionTo('home');
     });
 
-    permissionsService.get().then(function(permissions) {
-      authz.setPermissions(permissions);
-    })
 
+
+    $rootScope.$on('$currentUser',function() {
+      permissionsService.get().then(function(permissions) {
+        authz.setPermissions(permissions);
+      });
+    });
+
+    $rootScope.$on('$sessionEnd',function() {
+      authz.setPermissions([]);
+    });
 
     // var customDataPermisionsKey = 'apacheShiroPermissions';
     //

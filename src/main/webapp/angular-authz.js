@@ -151,7 +151,7 @@
                     }
 
                     if(permExpr) {
-                        $rootScope.$watch('permissions', function() {
+                        $rootScope.$watchCollection('permissions', function() {
                             evalElement();
                         });
                     }
@@ -179,7 +179,7 @@
                     }
 
                     if(permExpr) {
-                        $rootScope.$watch('permissions', function() {
+                        $rootScope.$watchCollection('permissions', function() {
                             evalElement();
                         });
                     }
