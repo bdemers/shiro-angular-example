@@ -230,3 +230,11 @@ body {
 .trooper-panel-body {
   height: 100%;
 }
+
+#user-button {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}

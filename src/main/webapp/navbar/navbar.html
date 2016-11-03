@@ -49,7 +49,7 @@
 
                     <div if-user class="btn-group" uib-dropdown >
                         <button id="user-button" type="button" class="btn btn-default" uib-dropdown-toggle>
-                            <img class="profile-image img-circle" id="gravatar"gravatar-src="{{user.email}}" gravatar-size="30">
+                            <img class="profile-image img-circle" id="gravatar" gravatar-src="user.email | lowercase" gravatar-size="35">
                             <span>{{user.username}}</span> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="user-button">
