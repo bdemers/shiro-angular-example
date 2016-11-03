@@ -16,6 +16,7 @@
 package com.stormpath.tutorial.dao;
 
 import com.stormpath.tutorial.models.Stormtrooper;
+import org.apache.shiro.util.StringUtils;
 
 import java.security.SecureRandom;
 import java.util.*;
@@ -56,13 +57,17 @@ public final class StormtrooperDao {
         return trooperMap.get(id);
     }
 
-    public void addStormtrooper(Stormtrooper stormtrooper) {
+    public Stormtrooper addStormtrooper(Stormtrooper stormtrooper) {
+        if (!StringUtils.hasText(stormtrooper.getId())) {
+            stormtrooper.setId(generateRandomId());
+        }
         trooperMap.put(stormtrooper.getId(), stormtrooper);
+        return stormtrooper;
     }
 
-    public void updateStormtrooper(Stormtrooper stormtrooper) {
+    public Stormtrooper updateStormtrooper(Stormtrooper stormtrooper) {
         // we are just backing with a map, so just call add.
-        addStormtrooper(stormtrooper);
+        return addStormtrooper(stormtrooper);
     }
 
     public boolean deleteStormtrooper(String id) {
@@ -82,8 +87,12 @@ public final class StormtrooperDao {
         return new Stormtrooper(id, planet, species, type);
     }
 
+    private static String generateRandomId() {
+        // HIGH chance of collisions, but, this is all for fun...
+        return "FN-"  + String.format("%04d", RANDOM.nextInt(9999));
+    }
+
     private static Stormtrooper randomTrooper() {
-        String id = "FN-"  + String.format("%04d", RANDOM.nextInt(9999));
-        return randomTrooper(id);
+        return randomTrooper(generateRandomId());
     }
 }

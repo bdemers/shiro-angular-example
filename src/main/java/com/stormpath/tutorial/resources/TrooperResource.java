@@ -66,8 +66,7 @@ public class TrooperResource {
         stormtrooper.setSpecies(species);
         stormtrooper.setPlanetOfOrigin(planetOfOrigin);
 
-        trooperDao.updateStormtrooper(stormtrooper);
-        return stormtrooper;
+        return trooperDao.updateStormtrooper(stormtrooper);
     }
 
     @POST
@@ -75,9 +74,15 @@ public class TrooperResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper updateTrooper(@PathParam("id") String id, Stormtrooper updatedTrooper) {
 
-        // TODO: check if ID is the same
-        trooperDao.updateStormtrooper(updatedTrooper);
-        return updatedTrooper;
+        return trooperDao.updateStormtrooper(updatedTrooper);
+    }
+
+    @POST
+    @Path("/")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Stormtrooper updateTrooper(Stormtrooper updatedTrooper) {
+
+        return trooperDao.updateStormtrooper(updatedTrooper);
     }
 
     @POST

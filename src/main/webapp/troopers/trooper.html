@@ -29,28 +29,7 @@
                             <h4 class="modal-title" id="editTrooperLabel">Stormtrooper: {{trooper.id}}</h4>
                         </div>
 
-                        <form role="form" >
-
-                            <!-- Modal Body -->
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <input type="text" class="form-control"
-                                           id="type" name="type" placeholder="Type" ng-model="$trooperModal.trooper.type"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="species">Species</label>
-                                    <input type="text" class="form-control"
-                                           id="species" name="species" placeholder="Species" ng-model="$trooperModal.trooper.species"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="planetOfOrigin">Planet of Origin</label>
-                                    <input type="text" class="form-control"
-                                           id="planetOfOrigin" name="planetOfOrigin" placeholder="Planet of Origin" ng-model="$trooperModal.trooper.planetOfOrigin"/>
-                                </div>
-                            </div>
-
-                        </form>
+                        <div ng-include="'troopers/modal-body.html'"></div>
 
                         <!-- Modal Footer -->
                         <div class="modal-footer">
@@ -60,8 +39,8 @@
 
                     </script>
                     <div class="btn-toolbar pull-right">
-                        <button type="button" class="btn btn-danger" ng-click="deleteTrooper()">Delete</button>
-                        <button type="button" class="btn btn-default" ng-click="$trooperModal.open(trooper)">Edit</button>
+                        <button type="button" class="btn btn-danger" ng-click="deleteTrooper()" has-permission="troopers:delete">Delete</button>
+                        <button type="button" class="btn btn-default" ng-click="$trooperModal.open(trooper)" has-permission="troopers:update">Edit</button>
                     </div>
                 </div>
 
