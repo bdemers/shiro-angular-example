@@ -1,0 +1,17 @@
+{
+  "name": "StormpathShiroAngularJSExample",
+  "description": "An example application using Stormpath and Apache Shiro with JAX-RS backend and an AngularJS frontend.",
+  "keywords": [
+    "shiro",
+    "servlet",
+    "JAX-RS",
+    "java",
+    "stormpath"
+  ],
+  "addons": [
+    "stormpath"
+  ],
+  "repository": "https://github.com/bdemers/shiro-angular-example",
+  "success_url": "/",
+  "env": { }
+}
