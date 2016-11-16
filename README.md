@@ -12,3 +12,7 @@ mvn jetty:run
 ```
 
 Then open your browser to http://localhost:8080
+
+Or deploy to Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/bdemers/shiro-angular-example)
