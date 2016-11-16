@@ -1,9 +1,9 @@
 package com.stormpath.tutorial;
 
+import com.stormpath.shiro.jaxrs.StormpathShiroFeature;
 import com.stormpath.tutorial.resources.PermissionsResource;
 import com.stormpath.tutorial.resources.TrooperResource;
 import com.stormpath.tutorial.resources.WelcomeResource;
-import org.apache.shiro.web.jaxrs.ShiroFeature;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ApplicationPath("/api")
-public class App extends Application {
+public class JaxrsApplication extends Application {
 
 
     @Override
@@ -19,7 +19,7 @@ public class App extends Application {
         Set<Class<?>> classes = new HashSet<>();
 
         // register Shiro
-        classes.add(ShiroFeature.class);
+        classes.add(StormpathShiroFeature.class);
 
         // resources
         classes.add(PermissionsResource.class);

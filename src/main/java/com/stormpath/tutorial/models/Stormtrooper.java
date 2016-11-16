@@ -15,9 +15,6 @@
  */
 package com.stormpath.tutorial.models;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class Stormtrooper {
 
     private String id;

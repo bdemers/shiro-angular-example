@@ -18,11 +18,11 @@
 
 angular.module('shiroExample', [
   'ui.router',
-  'ngResource',
   'ui.bootstrap',
   'ui.gravatar',
-  // 'ngAnimate',
-  // 'ngSanitize',
+  'ngResource',
+  'ngAnimate',
+  'ngSanitize',
   'stormpath',
   'stormpath.templates',
   'angular-authz'
@@ -48,38 +48,30 @@ angular.module('shiroExample', [
       states we would like to use to use for login
       and post-login
      */
-
     $stormpath.uiRouter({
       loginState: 'login',
       defaultPostLoginState: 'home'
     });
 
     /*
-      We want to redirect users back to the home
-      state after they logout, so we watch for the
-      logout event and then transition them to the
-      login state
+      We want reset the permissions and redirect
+      users back to the home state after they logout,
+      so we watch for the logout event and then
+      transition them to the login state
      */
     $rootScope.$on('$sessionEnd',function () {
+      authz.setPermissions([]);
       $state.transitionTo('home');
     });
 
-
-
+    /*
+      After login we need to get the users permissions from /api/permissions
+      and then set then via authz.setPermissions()
+     */
     $rootScope.$on('$currentUser',function() {
       permissionsService.get().then(function(permissions) {
         authz.setPermissions(permissions);
       });
     });
-
-    $rootScope.$on('$sessionEnd',function() {
-      authz.setPermissions([]);
-    });
-
-    // var customDataPermisionsKey = 'apacheShiroPermissions';
-    //
-    // $rootScope.$on('$currentUser',function($stateParams, user) {
-    //   authz.setPermissions( user.customData[customDataPermisionsKey] );
-    // });
 
   });

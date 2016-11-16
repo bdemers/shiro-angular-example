@@ -16,83 +16,23 @@
 package com.stormpath.tutorial.dao;
 
 import com.stormpath.tutorial.models.Stormtrooper;
-import org.apache.shiro.util.StringUtils;
 
-import java.security.SecureRandom;
-import java.util.*;
-
+import java.util.Collection;
 
 /**
- * Dummy DAO that will generate 50 random Stormtroopers upon creation.
+ * Example CRUD DAO interface.
  */
-public final class StormtrooperDao {
+public interface StormtrooperDao {
 
-    final static private String[] trooperTypes = {"Basic", "Space", "Aquatic", "Marine", "Jump", "Sand"};
-    final static private String[] planetsList = {"Coruscant", "Tatooine", "Felucia", "Hoth", "Naboo", "Serenno"};
-    final static private String[] speciesList = {"Human", "Kel Dor", "Nikto", "Twi'lek", "Unidentified"};
-    final static private Random RANDOM = new SecureRandom();
+    StormtrooperDao INSTANCE = new DefaultStormtrooperDao();
 
-    final private Map<String, Stormtrooper> trooperMap = Collections.synchronizedSortedMap(new TreeMap<String, Stormtrooper>());
+    Collection<Stormtrooper> listStormtroopers();
 
-    public StormtrooperDao() {
-        for (int i = 0; i < 50; i++) {
-            addStormtrooper(randomTrooper());
-        }
-    }
+    Stormtrooper getStormtrooper(String id);
 
-    private static class SingletonHolder {
-        static StormtrooperDao instance = new StormtrooperDao();
-    }
+    Stormtrooper addStormtrooper(Stormtrooper stormtrooper);
 
-    public static StormtrooperDao getInstance() {
-        return SingletonHolder.instance;
-    }
+    Stormtrooper updateStormtrooper(String id, Stormtrooper stormtrooper);
 
-    public Collection<Stormtrooper> listStormtroopers() {
-        return Collections.unmodifiableCollection(trooperMap.values());
-    }
-
-
-    public Stormtrooper getStormtrooper(String id) {
-        return trooperMap.get(id);
-    }
-
-    public Stormtrooper addStormtrooper(Stormtrooper stormtrooper) {
-        if (!StringUtils.hasText(stormtrooper.getId())) {
-            stormtrooper.setId(generateRandomId());
-        }
-        trooperMap.put(stormtrooper.getId(), stormtrooper);
-        return stormtrooper;
-    }
-
-    public Stormtrooper updateStormtrooper(Stormtrooper stormtrooper) {
-        // we are just backing with a map, so just call add.
-        return addStormtrooper(stormtrooper);
-    }
-
-    public boolean deleteStormtrooper(String id) {
-        return trooperMap.remove(id) != null;
-    }
-
-
-    ///////////////////////////////////
-    //  Dummy data generating below  //
-    ///////////////////////////////////
-
-    private static Stormtrooper randomTrooper(String id) {
-        String planet = planetsList[RANDOM.nextInt(planetsList.length)];
-        String species = speciesList[RANDOM.nextInt(speciesList.length)];
-        String type = trooperTypes[RANDOM.nextInt(trooperTypes.length)];
-
-        return new Stormtrooper(id, planet, species, type);
-    }
-
-    private static String generateRandomId() {
-        // HIGH chance of collisions, but, this is all for fun...
-        return "FN-"  + String.format("%04d", RANDOM.nextInt(9999));
-    }
-
-    private static Stormtrooper randomTrooper() {
-        return randomTrooper(generateRandomId());
-    }
+    boolean deleteStormtrooper(String id);
 }

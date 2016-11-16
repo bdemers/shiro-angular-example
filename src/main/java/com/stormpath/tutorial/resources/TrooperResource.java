@@ -27,13 +27,7 @@ import java.util.Collection;
 @Path("/troopers")
 public class TrooperResource {
 
-    final private StormtrooperDao trooperDao;
-
-    public TrooperResource()
-    {
-        super();
-        this.trooperDao = StormtrooperDao.getInstance();
-    }
+    final private StormtrooperDao trooperDao = StormtrooperDao.INSTANCE;
 
     @GET
     @Path("/")
@@ -60,49 +54,18 @@ public class TrooperResource {
     @Path("/{id}")
     @RequiresPermissions("troopers:update")
     @Produces({MediaType.APPLICATION_JSON})
-    public Stormtrooper updateTrooper(@PathParam("id") String id,
-                                      @FormParam("type") String type,
-                                      @FormParam("species") String species,
-                                      @FormParam("planetOfOrigin") String planetOfOrigin) {
-
-        Stormtrooper stormtrooper = getTrooper(id);
-        stormtrooper.setType(type);
-        stormtrooper.setSpecies(species);
-        stormtrooper.setPlanetOfOrigin(planetOfOrigin);
-
-        return trooperDao.updateStormtrooper(stormtrooper);
-    }
-
-    @POST
-    @Path("/{id}")
-    @RequiresPermissions("troopers:update")
-    @Produces({MediaType.APPLICATION_JSON})
     public Stormtrooper updateTrooper(@PathParam("id") String id, Stormtrooper updatedTrooper) {
 
-        return trooperDao.updateStormtrooper(updatedTrooper);
+        return trooperDao.updateStormtrooper(id, updatedTrooper);
     }
 
     @POST
     @Path("/")
     @RequiresPermissions("troopers:create")
     @Produces({MediaType.APPLICATION_JSON})
-    public Stormtrooper updateTrooper(Stormtrooper updatedTrooper) {
+    public Stormtrooper addTrooper(Stormtrooper stormtrooper) {
 
-        return trooperDao.updateStormtrooper(updatedTrooper);
-    }
-
-    @POST
-    @Path("/")
-    @RequiresPermissions("troopers:create")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Stormtrooper createTrooper(@FormParam("id") String id,
-                                      @FormParam("type") String type,
-                                      @FormParam("species") String species,
-                                      @FormParam("planetOfOrigin") String planetOfOrigin) {
-
-        Stormtrooper stormtrooper = new Stormtrooper(id, planetOfOrigin, species, type);
-        trooperDao.addStormtrooper(stormtrooper);
-        return stormtrooper;
+        return trooperDao.addStormtrooper(stormtrooper);
     }
 
     @DELETE

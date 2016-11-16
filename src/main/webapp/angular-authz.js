@@ -191,7 +191,7 @@
 angular.module('angular-authz').run(['$rootScope',function($rootScope){
 
         // update the scope to re-eval the hidden/shown elements
-        $rootScope.$on('$permissionsSetEvent',function(event, permissions){
+        $rootScope.$on('$permissionsSetEvent', function(event, permissions){
             $rootScope.permissions = permissions;
         });
     }])

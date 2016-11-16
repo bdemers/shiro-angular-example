@@ -40,5 +40,4 @@ public class WelcomeResource {
             this.messageOfTheDay = messageOfTheDay;
         }
     }
-
 }
