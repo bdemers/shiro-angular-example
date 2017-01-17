@@ -104,6 +104,11 @@
         </dependency>
         <dependency>
             <groupId>org.webjars.bower</groupId>
+            <artifactId>angular</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
             <artifactId>angular-resource</artifactId>
             <version>1.5.8</version>
         </dependency>
